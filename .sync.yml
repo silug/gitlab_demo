@@ -1,0 +1,7 @@
+---
+appveyor.yml:
+  delete: true
+.travis.yml:
+  delete: true
+CHANGELOG.md:
+  delete: true

@@ -1,0 +1,28 @@
+{
+  "name": "silug-gitlab_demo",
+  "version": "0.1.0",
+  "author": "Steven Pritchard",
+  "summary": "GitLab demo-related tasks",
+  "license": "Apache-2.0",
+  "source": "https://github.com/silug/gitlab_demo",
+  "dependencies": [
+
+  ],
+  "operatingsystem_support": [
+    {
+      "operatingsystem": "CentOS",
+      "operatingsystemrelease": [
+        "8"
+      ]
+    }
+  ],
+  "requirements": [
+    {
+      "name": "puppet",
+      "version_requirement": ">= 6.21.0 < 8.0.0"
+    }
+  ],
+  "pdk-version": "2.3.0",
+  "template-url": "pdk-default#2.3.0",
+  "template-ref": "tags/2.3.0-0-g8aaceff"
+}
