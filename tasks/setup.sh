@@ -28,7 +28,7 @@ group_labels=$( gitlab -o json group-label list --group-id "$group_id" )
 
 # Add labels
 declare -A label_descriptions=(
-	[Bug]='Issue describes a bug'
+    [Bug]='Issue describes a bug'
     [Feature\ Request]='Issue describes a feature request'
     [Tech\ Debt]='Issue describes known tech debt'
     [In\ Progress]='Issue is actively being worked'
@@ -73,6 +73,7 @@ declare -A issue_descriptions=(
     ['Add zram']='Enable the [`zram`](https://forge.puppet.com/silug/zram) Puppet module on all nodes.'
     ['Enable eyaml']=$'All secrets should be encrypted.  At a minimum, this would require:\n* [ ] Enable eyaml on the Puppet node(s)\n* [ ] Update the import_control_repo task to encrypt secrets'
     ['Initial CI jobs fail']=$'Investigate initial CI job failures.\n\nSee [job #1](../../jobs/1) for an example.'
+    ['GitLab demo']=$'Demonstrate:\n* [ ] repos/commits/branches/tags\n* [ ] wikis\n* [ ] issues/epics/milestones/boards\n* [ ] merge requests\n* [ ] CI pipelines/jobs\n\nDiscuss:\n* [ ] Container/package registry\n* [ ] SAST/DAST\n* [ ] k8s integration\n* [ ] Mattermost\n* [ ] CE vs EE\n* [ ] gitlab.com'
 )
 
 declare -A issue_labels=(
@@ -163,3 +164,14 @@ fi
 popd
 
 popd
+
+####
+#### Import this repo
+####
+out=$( gitlab -o json project list | jq '.[] | select(.path_with_namespace == "gitlab_demo")' )
+if [ -z "$out" ] ; then
+    out=$( gitlab -o json project create --name gitlab_demo --visibility public --import-url https://github.com/silug/gitlab_demo.git )
+    if [ "$?" -ne 0 ] ; then
+        die "Failed to create gitlab_demo project"
+    fi
+fi
